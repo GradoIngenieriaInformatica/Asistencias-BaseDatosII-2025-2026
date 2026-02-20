@@ -1,0 +1,1 @@
+Asistencia 18/02/2026 Juan Fernando Caicedo
