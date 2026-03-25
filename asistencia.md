@@ -4,3 +4,4 @@ Asistencia 09/03/2026
 Asistencia 11/03/2026
 Asistencia 16/03/2026
 Asistencia 18/03/2026
+Asistencia 25/03/2026
