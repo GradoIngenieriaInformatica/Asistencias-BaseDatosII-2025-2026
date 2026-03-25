@@ -27,6 +27,11 @@ token = os.environ["GITHUB_TOKEN"]
 repo = os.environ["REPO"]
 config = json.loads(os.environ["ASISTENCIA_CONFIG"])
 
+print("===== DEBUG ENTORNO =====")
+print("Repo:", repo)
+print("Token presente:", "SI" if token else "NO")
+print("=========================")
+
 raw_col = config["columna"]
 columna = col_to_num(raw_col)
 
@@ -60,10 +65,20 @@ req = urllib.request.Request(
 )
 
 response = urllib.request.urlopen(req)
+
+print("===== DEBUG API =====")
+print("URL:", url)
+print("Status OK, leyendo PRs...")
 prs = json.loads(response.read().decode())
+print("TOTAL PRs recibidos:", len(prs))
+print("=======================")
 
 procesados = 0
+print("===== LISTADO PRs =====")
 for pr in prs:
+    print("-----------------------------------")
+    print("PR user:", pr["user"]["login"])
+    print("created_at (UTC):", pr["created_at"])
     user = pr["user"]["login"].lower()
     created_at = pr["created_at"]  # UTC
 
@@ -75,8 +90,19 @@ for pr in prs:
 
     fecha_pr = dt_spain.strftime("%Y-%m-%d")
     hora_pr = dt_spain.strftime("%H:%M")
+    print("Fecha convertida:", fecha_pr)
+    print("Hora convertida:", hora_pr)
 
-    if fecha_pr != fecha or not (hora_inicio <= hora_pr <= hora_fin):
+    if user not in alumnos:
+        print("❌ SKIP user no encontrado:", user)
+        continue
+
+    if fecha_pr != fecha:
+        print("❌ SKIP fecha:", fecha_pr, "!=", fecha)
+        continue
+
+    if not (hora_inicio <= hora_pr <= hora_fin):
+        print("❌ SKIP hora:", hora_pr, "fuera de", hora_inicio, "-", hora_fin)
         continue
 
     numero = alumnos[user]
@@ -89,6 +115,7 @@ for pr in prs:
     print("Hora PR:", hora_pr)
     print("===================================")
 
+    print("✅ PR VALIDO → pasa filtros")
     payload = {
         "numero": str(numero),
         "columna": columna,
@@ -109,7 +136,8 @@ for pr in prs:
     try:
         resp = urllib.request.urlopen(req_sheet)
         respuesta = resp.read().decode()
-        print(f"{user} registrado: {resp.read().decode()}")
+        respuesta = resp.read().decode()
+        print(f"{user} registrado: {respuesta}")
         procesados += 1
         print("Respuesta del webhook:", respuesta)
     except Exception as e:
