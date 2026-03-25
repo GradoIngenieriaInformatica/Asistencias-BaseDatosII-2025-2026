@@ -6,7 +6,7 @@
 - 16/03 asistencia a examen
 - 18/03 asistencia clase
 - 23/03 asistencia clase
-
+- 25/03 asistencia clase
 
 
 
