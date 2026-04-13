@@ -9,6 +9,8 @@
 - 25/03 asistencia clase
 - 06/04 asistencia clase
 - 08/04 asistencia clase
+- 13/04 asistencia clase
+
 
 
 
