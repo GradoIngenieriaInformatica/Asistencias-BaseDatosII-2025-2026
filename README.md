@@ -14,4 +14,4 @@
 - 20/04 asistencia clase
 - 22/04 asistencia clase
 - 27/04 asistencia clase
-
+- 29/04 asistencia clase
