@@ -13,7 +13,7 @@ jobs:
 
       - name: Ejecutar script de asistencia manual
         env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          GITHUB_TOKEN: '${{ secrets.GB_TOKEN }}'
           ALUMNOS_CSV: '${{ secrets.ALUMNOS_CSV }}'
           ASISTENCIA_CONFIG: '${{ secrets.ASISTENCIA_CONFIG }}'
           SHEETS_WEBHOOK: '${{ secrets.SHEETS_WEBHOOK }}'
