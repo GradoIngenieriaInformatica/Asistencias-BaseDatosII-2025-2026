@@ -1,0 +1,43 @@
+db.tu_coleccion.aggregate([
+  // Etapa 1: FILTRAR (Equivale al WHERE / MATCH)
+  { 
+    $match: { 
+      "campo_a_filtrar": "valor_o_condicion" 
+    } 
+  },
+
+  // Etapa 2: AGRUPAR Y CONTAR/SUMAR (Equivale al GROUP BY / WITH-COUNT)
+  { 
+    $group: { 
+      _id: "$campo_por_el_que_agrupas", 
+      "nombre_del_total": { $sum: 1 } // Pon 1 para CONTAR, o "$campo" para SUMAR valores
+    } 
+  },
+
+  // Etapa 3: ORDENAR (Equivale al ORDER BY)
+  { 
+    $sort: { 
+      "nombre_del_total": -1 // -1 para Mayor a Menor (Desc), 1 para Menor a Mayor (Asc)
+    } 
+  }
+])
+
+
+
+Promedio 
+"sueldoMedio": { $avg: "$salario" }
+
+Maximo 
+"precioMaximo": { $max: "$precio" }
+
+Minimo 
+"precioMinimo": { $min: "$precio" }
+
+Guardar una lista de elementos únicos
+"Agrupa por país y saca una lista de las distintas ciudades que tienen tiendas (sin repetir nombres)".
+"ciudadesDiferentes": { $addToSet: "$ciudad" }
+
+
+Saca una lista con todos los títulos de los libros publicados por cada autor
+
+"todosLosLibros": { $push: "$titulo" }
